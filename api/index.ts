@@ -1,0 +1,88 @@
+import type { VercelRequest, VercelResponse } from "@vercel/node";
+import express, { type Request, Response, NextFunction } from "express";
+import { storage } from "../server/storage";
+import { insertContactMessageSchema } from "../shared/schema";
+import { ZodError } from "zod";
+
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.get("/api/projects", async (_req, res) => {
+  try {
+    const projects = await storage.getProjects();
+    res.json(projects);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch projects" });
+  }
+});
+
+app.get("/api/projects/featured", async (_req, res) => {
+  try {
+    const projects = await storage.getFeaturedProjects();
+    res.json(projects);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch featured projects" });
+  }
+});
+
+app.get("/api/projects/:id", async (req, res) => {
+  try {
+    const project = await storage.getProject(req.params.id);
+    if (!project) {
+      return res.status(404).json({ error: "Project not found" });
+    }
+    res.json(project);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch project" });
+  }
+});
+
+app.get("/api/posts", async (_req, res) => {
+  try {
+    const posts = await storage.getPosts();
+    res.json(posts);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch posts" });
+  }
+});
+
+app.get("/api/posts/:id", async (req, res) => {
+  try {
+    const post = await storage.getPost(req.params.id);
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+    res.json(post);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch post" });
+  }
+});
+
+app.post("/api/contact", async (req, res) => {
+  try {
+    const validatedData = insertContactMessageSchema.parse(req.body);
+    const message = await storage.createContactMessage(validatedData);
+    res.status(201).json({ success: true, message: "Message sent successfully", id: message.id });
+  } catch (error) {
+    if (error instanceof ZodError) {
+      return res.status(400).json({ error: "Invalid request data", details: error.errors });
+    }
+    res.status(500).json({ error: "Failed to send message" });
+  }
+});
+
+app.get("/api/health", (_req, res) => {
+  res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  const status = err.status || err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  res.status(status).json({ message });
+});
+
+export default function handler(req: VercelRequest, res: VercelResponse) {
+  return app(req as any, res as any);
+}

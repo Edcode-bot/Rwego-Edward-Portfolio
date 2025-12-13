@@ -1,13 +1,9 @@
 import type { Express } from "express";
-import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactMessageSchema } from "@shared/schema";
 import { ZodError } from "zod";
 
-export async function registerRoutes(
-  httpServer: Server,
-  app: Express
-): Promise<Server> {
+export async function registerRoutes(app: Express): Promise<void> {
   
   app.get("/api/projects", async (_req, res) => {
     try {
@@ -73,5 +69,7 @@ export async function registerRoutes(
     }
   });
 
-  return httpServer;
+  app.get("/api/health", (_req, res) => {
+    res.json({ status: "ok", timestamp: new Date().toISOString() });
+  });
 }
