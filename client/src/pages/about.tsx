@@ -1,31 +1,38 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Download, MapPin, Calendar, Award, Code, Rocket } from "lucide-react";
+import { MapPin, Calendar, Award, Code, Rocket, ExternalLink, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionHeader } from "@/components/section-header";
 import { SkillChart, SkillRadar } from "@/components/skill-chart";
 import { TechPill } from "@/components/tech-pill";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import type { Skill, Achievement } from "@shared/schema";
 
 const skills: Skill[] = [
-  { name: "React/Next.js", level: 92, category: "frontend" },
-  { name: "TypeScript", level: 88, category: "frontend" },
-  { name: "Tailwind CSS", level: 95, category: "frontend" },
-  { name: "Framer Motion", level: 85, category: "frontend" },
-  { name: "Node.js", level: 85, category: "backend" },
-  { name: "Python", level: 80, category: "backend" },
-  { name: "PostgreSQL", level: 78, category: "backend" },
-  { name: "Express/FastAPI", level: 82, category: "backend" },
-  { name: "Solidity", level: 75, category: "blockchain" },
-  { name: "Ethers.js/Web3.js", level: 80, category: "blockchain" },
-  { name: "Celo/Base", level: 78, category: "blockchain" },
-  { name: "Smart Contracts", level: 72, category: "blockchain" },
-  { name: "OpenAI API", level: 88, category: "ai" },
-  { name: "LangChain", level: 75, category: "ai" },
-  { name: "Machine Learning", level: 65, category: "ai" },
-  { name: "Git/GitHub", level: 90, category: "tools" },
-  { name: "Docker", level: 70, category: "tools" },
-  { name: "Vercel/Railway", level: 85, category: "tools" },
+  { name: "React/Next.js", level: 85, category: "frontend" },
+  { name: "TypeScript", level: 80, category: "frontend" },
+  { name: "Tailwind CSS", level: 90, category: "frontend" },
+  { name: "Framer Motion", level: 75, category: "frontend" },
+  { name: "Node.js", level: 78, category: "backend" },
+  { name: "Python", level: 72, category: "backend" },
+  { name: "PostgreSQL", level: 70, category: "backend" },
+  { name: "Express/FastAPI", level: 75, category: "backend" },
+  { name: "Solidity", level: 65, category: "blockchain" },
+  { name: "Ethers.js/Web3.js", level: 70, category: "blockchain" },
+  { name: "Celo/Base", level: 68, category: "blockchain" },
+  { name: "Smart Contracts", level: 62, category: "blockchain" },
+  { name: "OpenAI API", level: 80, category: "ai" },
+  { name: "LangChain", level: 65, category: "ai" },
+  { name: "Machine Learning", level: 55, category: "ai" },
+  { name: "Git/GitHub", level: 82, category: "tools" },
+  { name: "Docker", level: 60, category: "tools" },
+  { name: "Vercel/Railway", level: 78, category: "tools" },
 ];
 
 const achievements: Achievement[] = [
@@ -35,6 +42,8 @@ const achievements: Achievement[] = [
     description: "Represented school at the Uganda Physics & Sciences Teachers' Union competitions",
     date: "2024",
     type: "award",
+    certificateUrl: "https://drive.google.com/file/d/19c8tbX8dEweQ9YlVTia3ar1iyzC_iK0B/view",
+    certificateImage: "https://drive.google.com/uc?export=view&id=19c8tbX8dEweQ9YlVTia3ar1iyzC_iK0B",
   },
   {
     id: "2", 
@@ -42,6 +51,8 @@ const achievements: Achievement[] = [
     description: "Exhibited IntelliTutor AI at the Secondary Science & Mathematics Teachers conference",
     date: "2024",
     type: "award",
+    certificateUrl: "https://drive.google.com/file/d/19alP6G5gVAUdVEg5TYu6J7txMIEVzWcn/view",
+    certificateImage: "https://drive.google.com/uc?export=view&id=19alP6G5gVAUdVEg5TYu6J7txMIEVzWcn",
   },
   {
     id: "3",
@@ -49,13 +60,8 @@ const achievements: Achievement[] = [
     description: "Participated in the International Science & Computing Challenge",
     date: "2023",
     type: "award",
-  },
-  {
-    id: "4",
-    title: "Hackathons & Proof of Ship",
-    description: "Active participant in various hackathons and building in public challenges",
-    date: "2023-2024",
-    type: "project",
+    certificateUrl: "https://drive.google.com/file/d/1xAYG8lfiHmgB8hEFyGJqLMysADZ6Q01d/view",
+    certificateImage: "https://drive.google.com/uc?export=view&id=1xAYG8lfiHmgB8hEFyGJqLMysADZ6Q01d",
   },
 ];
 
@@ -77,7 +83,11 @@ const services = [
   },
 ];
 
+const profileImageUrl = "https://drive.google.com/uc?export=view&id=1wATYXPoNKNK13nE85YykDm_k3afvtPUC";
+
 export default function About() {
+  const [selectedCertificate, setSelectedCertificate] = useState<Achievement | null>(null);
+
   return (
     <div className="min-h-screen pt-24" data-testid="page-about">
       <section className="py-16 md:py-24" data-testid="section-about-hero">
@@ -89,9 +99,9 @@ export default function About() {
               transition={{ duration: 0.6 }}
             >
               <div className="relative">
-                <div className="aspect-square max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden">
+                <div className="aspect-square max-w-md mx-auto lg:mx-0 rounded-full overflow-hidden border-4 border-primary/20">
                   <img
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop&crop=faces"
+                    src={profileImageUrl}
                     alt="Rwego Edward - Profile"
                     className="w-full h-full object-cover"
                     data-testid="img-profile"
@@ -135,7 +145,7 @@ export default function About() {
                 on something that pushes the boundaries of what's possible.
               </p>
               
-              <div className="flex flex-wrap gap-3 mb-8">
+              <div className="flex flex-wrap gap-3">
                 <TechPill label="AI/ML" variant="ai" />
                 <TechPill label="Web3" variant="web3" />
                 <TechPill label="React" variant="fullstack" />
@@ -143,11 +153,6 @@ export default function About() {
                 <TechPill label="Node.js" variant="fullstack" />
                 <TechPill label="Solidity" variant="web3" />
               </div>
-
-              <Button size="lg" className="group" data-testid="button-download-resume">
-                <Download className="mr-2 h-4 w-4" />
-                Download Resume
-              </Button>
             </motion.div>
           </div>
         </div>
@@ -217,47 +222,81 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Achievements & Recognition"
-            subtitle="Milestones and competitions"
+            subtitle="Milestones and certifications"
           />
 
-          <div className="relative">
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-border md:-translate-x-0.5" />
-            
-            <div className="space-y-8">
-              {achievements.map((achievement, index) => (
-                <motion.div
-                  key={achievement.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`relative flex items-start gap-6 ${
-                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                  data-testid={`achievement-${achievement.id}`}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {achievements.map((achievement, index) => (
+              <motion.div
+                key={achievement.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card 
+                  className="overflow-hidden cursor-pointer hover-elevate group"
+                  onClick={() => setSelectedCertificate(achievement)}
+                  data-testid={`card-achievement-${achievement.id}`}
                 >
-                  <div className={`flex-1 ${index % 2 === 0 ? "md:text-right" : ""}`}>
-                    <Card className="inline-block text-left">
-                      <CardContent className="p-5">
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                          <Calendar className="h-3 w-3" />
-                          {achievement.date}
-                        </div>
-                        <h3 className="font-semibold text-lg mb-2">{achievement.title}</h3>
-                        <p className="text-muted-foreground text-sm">{achievement.description}</p>
-                      </CardContent>
-                    </Card>
+                  <div className="aspect-[4/3] overflow-hidden bg-muted relative">
+                    <img
+                      src={achievement.certificateImage}
+                      alt={`${achievement.title} Certificate`}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      data-testid={`img-certificate-${achievement.id}`}
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                      <ExternalLink className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
                   </div>
-                  
-                  <div className="absolute left-4 md:left-1/2 w-3 h-3 rounded-full bg-primary -translate-x-1/2 mt-6 md:mt-8 ring-4 ring-background" />
-                  
-                  <div className="flex-1 hidden md:block" />
-                </motion.div>
-              ))}
-            </div>
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
+                      <Calendar className="h-3 w-3" />
+                      {achievement.date}
+                    </div>
+                    <h3 className="font-semibold mb-1">{achievement.title}</h3>
+                    <p className="text-sm text-muted-foreground">{achievement.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
+
+      <Dialog open={!!selectedCertificate} onOpenChange={() => setSelectedCertificate(null)}>
+        <DialogContent className="max-w-4xl">
+          <DialogHeader>
+            <DialogTitle>{selectedCertificate?.title}</DialogTitle>
+          </DialogHeader>
+          {selectedCertificate && (
+            <div className="space-y-4">
+              <div className="rounded-lg overflow-hidden">
+                <img
+                  src={selectedCertificate.certificateImage}
+                  alt={`${selectedCertificate.title} Certificate`}
+                  className="w-full h-auto"
+                />
+              </div>
+              <div className="flex items-center justify-between gap-4">
+                <p className="text-sm text-muted-foreground">{selectedCertificate.description}</p>
+                <Button asChild>
+                  <a 
+                    href={selectedCertificate.certificateUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    data-testid="link-certificate-external"
+                  >
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    View Original
+                  </a>
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

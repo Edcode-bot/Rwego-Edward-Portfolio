@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, ChevronDown, ChevronUp } from "lucide-react";
+import { Calendar, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,10 @@ interface BlogPostCardProps {
 
 export function BlogPostCard({ post, index = 0, compact = false }: BlogPostCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   
   const formattedDate = post.createdAt 
     ? new Date(post.createdAt).toLocaleDateString('en-US', { 
@@ -25,8 +29,47 @@ export function BlogPostCard({ post, index = 0, compact = false }: BlogPostCardP
 
   const defaultPlaceholder = "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=800&fit=crop";
   const rawImages = post.imageUrls || (post.imageUrl ? [post.imageUrl] : []);
-  const images = rawImages.length > 0 ? rawImages : [defaultPlaceholder];
-  const imageCount = Math.min(images.length, 3);
+  const images = rawImages.length > 0 ? rawImages.slice(0, 3) : [defaultPlaceholder];
+  const hasMultipleImages = images.length > 1;
+
+  const minSwipeDistance = 50;
+
+  const nextImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const goToImage = (idx: number) => {
+    setCurrentImageIndex(idx);
+  };
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe && hasMultipleImages) {
+      nextImage();
+    }
+    if (isRightSwipe && hasMultipleImages) {
+      prevImage();
+    }
+  };
 
   if (compact) {
     return (
@@ -61,69 +104,6 @@ export function BlogPostCard({ post, index = 0, compact = false }: BlogPostCardP
     );
   }
 
-  const renderImageGrid = () => {
-    if (imageCount === 0) return null;
-
-    if (imageCount === 1) {
-      return (
-        <div className="aspect-square overflow-hidden">
-          <img
-            src={images[0]}
-            alt={post.title}
-            className="w-full h-full object-cover"
-            data-testid={`img-post-${post.id}-0`}
-          />
-        </div>
-      );
-    }
-
-    if (imageCount === 2) {
-      return (
-        <div className="aspect-square grid grid-cols-2 gap-0.5 overflow-hidden">
-          {images.slice(0, 2).map((img, idx) => (
-            <div key={idx} className="overflow-hidden">
-              <img
-                src={img}
-                alt={`${post.title} ${idx + 1}`}
-                className="w-full h-full object-cover"
-                data-testid={`img-post-${post.id}-${idx}`}
-              />
-            </div>
-          ))}
-        </div>
-      );
-    }
-
-    return (
-      <div className="aspect-square grid grid-cols-2 gap-0.5 overflow-hidden">
-        <div className="row-span-2 overflow-hidden">
-          <img
-            src={images[0]}
-            alt={`${post.title} 1`}
-            className="w-full h-full object-cover"
-            data-testid={`img-post-${post.id}-0`}
-          />
-        </div>
-        <div className="overflow-hidden">
-          <img
-            src={images[1]}
-            alt={`${post.title} 2`}
-            className="w-full h-full object-cover"
-            data-testid={`img-post-${post.id}-1`}
-          />
-        </div>
-        <div className="overflow-hidden">
-          <img
-            src={images[2]}
-            alt={`${post.title} 3`}
-            className="w-full h-full object-cover"
-            data-testid={`img-post-${post.id}-2`}
-          />
-        </div>
-      </div>
-    );
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -132,7 +112,66 @@ export function BlogPostCard({ post, index = 0, compact = false }: BlogPostCardP
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <Card className="group overflow-hidden" data-testid={`card-post-${post.id}`}>
-        {renderImageGrid()}
+        <div 
+          ref={containerRef}
+          className="relative aspect-square overflow-hidden touch-pan-y"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.img
+              key={currentImageIndex}
+              src={images[currentImageIndex]}
+              alt={`${post.title} ${currentImageIndex + 1}`}
+              className="w-full h-full object-cover absolute inset-0"
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+              draggable={false}
+              data-testid={`img-post-${post.id}-${currentImageIndex}`}
+            />
+          </AnimatePresence>
+
+          {hasMultipleImages && (
+            <>
+              <Button
+                size="icon"
+                variant="ghost"
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                onClick={prevImage}
+                data-testid={`button-prev-${post.id}`}
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </Button>
+              <Button
+                size="icon"
+                variant="ghost"
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                onClick={nextImage}
+                data-testid={`button-next-${post.id}`}
+              >
+                <ChevronRight className="h-5 w-5" />
+              </Button>
+
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                {images.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={(e) => { e.stopPropagation(); goToImage(idx); }}
+                    className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                      idx === currentImageIndex 
+                        ? "bg-white w-4" 
+                        : "bg-white/50 hover:bg-white/75"
+                    }`}
+                    data-testid={`dot-${post.id}-${idx}`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+        </div>
         
         <div className="p-4">
           <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
@@ -153,7 +192,7 @@ export function BlogPostCard({ post, index = 0, compact = false }: BlogPostCardP
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <p className="text-muted-foreground text-sm mb-3" data-testid={`text-post-content-${post.id}`}>
+                <p className="text-muted-foreground text-sm mb-3 whitespace-pre-wrap" data-testid={`text-post-content-${post.id}`}>
                   {post.content}
                 </p>
               </motion.div>

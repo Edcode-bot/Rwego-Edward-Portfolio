@@ -1,0 +1,90 @@
+SYSTEM PROMPT — FINAL PORTFOLIO EDITS (Rwego Edward)
+
+You are working on Rwego Edward’s personal portfolio website.
+DO NOT remove any existing features unless explicitly stated.
+Your task is to refine, enhance, and implement the following updates cleanly.
+
+GLOBAL NAVIGATION
+- On every navbar link click, route user to the TOP of the destination page.
+- Implement scroll-to-top on route change (SPA or standard routing).
+
+BLOG PAGE
+- Remove sections completely:
+  * Popular Tags
+  * Recent Posts
+- Blog cards:
+  * Support up to 3 images per post.
+  * Images must swipe horizontally (Instagram-style).
+  * Add pagination dots indicating multiple images.
+  * Smooth transitions.
+  * Blog content must expand/collapse for long text.
+
+SOCIAL LINKS (USE EXACTLY)
+X: https://x.com/Edcode_9
+GitHub: https://github.com/Edcode-bot
+Email: rwegoedward123@gmail.com
+Instagram: https://www.instagram.com/rwego_9
+LinkedIn: https://www.linkedin.com/in/rwego-edward-440052325
+Discord: edcodecore_9
+Apply where relevant (footer, about, contact, icons).
+
+ABOUT PAGE
+Achievements & Recognition:
+- Convert cards to image-based cards.
+- Each card shows certificate images (clickable/zoomable).
+- Keep title + short description.
+Certificate sources:
+UPSTU Regionals & Nationals:
+https://drive.google.com/file/d/19c8tbX8dEweQ9YlVTia3ar1iyzC_iK0B/view
+SESEMAT Exhibition:
+https://drive.google.com/file/d/19alP6G5gVAUdVEg5TYu6J7txMIEVzWcn/view
+ISCC Uganda:
+https://drive.google.com/file/d/1xAYG8lfiHmgB8hEFyGJqLMysADZ6Q01d/view
+- Do NOT add hackathons or Web3 recognitions yet (Celo Proof of Ship, Base Build, etc.).
+
+Skills & Expertise:
+- Keep ratings minimal and understated.
+- No exaggerated progress bars.
+
+Remove:
+- Download Resume button.
+
+Profile Image:
+Replace with:
+https://drive.google.com/file/d/1wATYXPoNKNK13nE85YykDm_k3afvtPUC/view
+Ensure responsive sizing and clean crop (rounded or circular).
+
+PROJECTS PAGE
+- Remove buttons:
+  * Live Demo
+  * Code
+- Replace project images with logos/banners.
+- Visit each project site/repo and select best logo/banner.
+- Logos must be centered, high-contrast, light/dark compatible.
+
+BRANDING
+Favicon:
+- Minimal lightning bolt inside a circle.
+- Style: clean, geometric, high contrast.
+- Colors: electric yellow on black (preferred).
+- Must render clearly at 16x16 and 32x32.
+- Works in light and dark mode.
+
+Navbar Brand Icon:
+- Replace site name with “R>”.
+- Font: JetBrains Mono or Fira Code.
+- Bold, monospaced, slightly forward-leaning.
+- Clickable, routes to homepage.
+- Proper spacing and alignment.
+
+Typewriter Animation (navbar opposite icon):
+- Display text: “Rwego Edward”.
+- Typewriter effect with blinking cursor/underscore.
+- Type → pause → optional loop/backspace.
+- Responsive and clean in light/dark mode.
+- Implement using CSS + JavaScript or framework in use.
+
+FINAL RULES
+- Maintain performance, accessibility, and responsiveness.
+- No clutter, no gimmicks.
+- This is a personal brand portfolio, not a template.

@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Github, Mail, MapPin } from "lucide-react";
-import { SiX } from "react-icons/si";
+import { SiX, SiLinkedin, SiInstagram, SiDiscord } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 
 const footerLinks = {
@@ -13,6 +13,15 @@ const footerLinks = {
   ],
 };
 
+const socialLinks = {
+  x: "https://x.com/Edcode_9",
+  github: "https://github.com/Edcode-bot",
+  email: "mailto:rwegoedward123@gmail.com",
+  instagram: "https://www.instagram.com/rwego_9",
+  linkedin: "https://www.linkedin.com/in/rwego-edward-440052325",
+  discord: "edcodecore_9",
+};
+
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -23,10 +32,10 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Link href="/">
               <div className="flex items-center gap-3 cursor-pointer mb-4" data-testid="link-footer-logo">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">E</span>
-                </div>
-                <span className="font-bold text-xl">Edcode</span>
+                <span className="font-mono font-bold text-2xl text-primary" style={{ fontFamily: "'JetBrains Mono', 'Fira Code', monospace" }}>
+                  R&gt;
+                </span>
+                <span className="font-bold text-xl">Rwego Edward</span>
               </div>
             </Link>
             <p className="text-muted-foreground max-w-md mb-6">
@@ -37,19 +46,29 @@ export function Footer() {
               <MapPin className="h-4 w-4" />
               <span>Kampala, Uganda</span>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <Button variant="outline" size="icon" asChild>
-                <a href="#" target="_blank" rel="noopener noreferrer" data-testid="link-footer-github">
+                <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" data-testid="link-footer-github">
                   <Github className="h-4 w-4" />
                 </a>
               </Button>
               <Button variant="outline" size="icon" asChild>
-                <a href="#" target="_blank" rel="noopener noreferrer" data-testid="link-footer-x">
+                <a href={socialLinks.x} target="_blank" rel="noopener noreferrer" data-testid="link-footer-x">
                   <SiX className="h-4 w-4" />
                 </a>
               </Button>
               <Button variant="outline" size="icon" asChild>
-                <a href="#" data-testid="link-footer-email">
+                <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" data-testid="link-footer-linkedin">
+                  <SiLinkedin className="h-4 w-4" />
+                </a>
+              </Button>
+              <Button variant="outline" size="icon" asChild>
+                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" data-testid="link-footer-instagram">
+                  <SiInstagram className="h-4 w-4" />
+                </a>
+              </Button>
+              <Button variant="outline" size="icon" asChild>
+                <a href={socialLinks.email} data-testid="link-footer-email">
                   <Mail className="h-4 w-4" />
                 </a>
               </Button>

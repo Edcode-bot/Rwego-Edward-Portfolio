@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Github, Mail } from "lucide-react";
-import { SiX } from "react-icons/si";
+import { SiX, SiLinkedin, SiInstagram, SiDiscord } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 
@@ -13,6 +13,55 @@ const navLinks = [
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
+
+const socialLinks = {
+  x: "https://x.com/Edcode_9",
+  github: "https://github.com/Edcode-bot",
+  email: "mailto:rwegoedward123@gmail.com",
+  instagram: "https://www.instagram.com/rwego_9",
+  linkedin: "https://www.linkedin.com/in/rwego-edward-440052325",
+};
+
+function TypewriterText() {
+  const [displayText, setDisplayText] = useState("");
+  const fullText = "Rwego Edward";
+  const [isTyping, setIsTyping] = useState(true);
+
+  useEffect(() => {
+    if (isTyping) {
+      if (displayText.length < fullText.length) {
+        const timeout = setTimeout(() => {
+          setDisplayText(fullText.slice(0, displayText.length + 1));
+        }, 100);
+        return () => clearTimeout(timeout);
+      } else {
+        const timeout = setTimeout(() => {
+          setIsTyping(false);
+        }, 3000);
+        return () => clearTimeout(timeout);
+      }
+    } else {
+      if (displayText.length > 0) {
+        const timeout = setTimeout(() => {
+          setDisplayText(displayText.slice(0, -1));
+        }, 50);
+        return () => clearTimeout(timeout);
+      } else {
+        const timeout = setTimeout(() => {
+          setIsTyping(true);
+        }, 500);
+        return () => clearTimeout(timeout);
+      }
+    }
+  }, [displayText, isTyping]);
+
+  return (
+    <span className="font-mono text-sm text-muted-foreground hidden lg:inline-block">
+      {displayText}
+      <span className="animate-pulse">_</span>
+    </span>
+  );
+}
 
 export function Navbar() {
   const [location] = useLocation();
@@ -48,15 +97,14 @@ export function Navbar() {
           <div className="flex items-center justify-between gap-4">
             <Link href="/">
               <motion.div
-                className="flex items-center gap-2 cursor-pointer"
+                className="flex items-center gap-3 cursor-pointer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 data-testid="link-logo"
               >
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">E</span>
-                </div>
-                <span className="font-bold text-xl hidden sm:block">Edcode</span>
+                <span className="font-mono font-bold text-2xl text-primary" style={{ fontFamily: "'JetBrains Mono', 'Fira Code', monospace" }}>
+                  R&gt;
+                </span>
               </motion.div>
             </Link>
 
@@ -86,7 +134,8 @@ export function Navbar() {
               ))}
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
+              <TypewriterText />
               <ThemeToggle />
 
               <Button
@@ -154,19 +203,29 @@ export function Navbar() {
 
               <div className="mt-8 pt-8 border-t border-border">
                 <p className="text-sm text-muted-foreground mb-4">Connect with me</p>
-                <div className="flex gap-3">
+                <div className="flex flex-wrap gap-2">
                   <Button variant="outline" size="icon" asChild>
-                    <a href="#" target="_blank" rel="noopener noreferrer" data-testid="link-github-mobile">
+                    <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" data-testid="link-github-mobile">
                       <Github className="h-4 w-4" />
                     </a>
                   </Button>
                   <Button variant="outline" size="icon" asChild>
-                    <a href="#" target="_blank" rel="noopener noreferrer" data-testid="link-x-mobile">
+                    <a href={socialLinks.x} target="_blank" rel="noopener noreferrer" data-testid="link-x-mobile">
                       <SiX className="h-4 w-4" />
                     </a>
                   </Button>
                   <Button variant="outline" size="icon" asChild>
-                    <a href="#" data-testid="link-email-mobile">
+                    <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" data-testid="link-linkedin-mobile">
+                      <SiLinkedin className="h-4 w-4" />
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="icon" asChild>
+                    <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" data-testid="link-instagram-mobile">
+                      <SiInstagram className="h-4 w-4" />
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="icon" asChild>
+                    <a href={socialLinks.email} data-testid="link-email-mobile">
                       <Mail className="h-4 w-4" />
                     </a>
                   </Button>

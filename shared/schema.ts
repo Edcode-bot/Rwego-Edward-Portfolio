@@ -66,6 +66,8 @@ export interface Achievement {
   date: string;
   type: "award" | "project" | "education" | "work";
   icon?: string;
+  certificateUrl?: string;
+  certificateImage?: string;
 }
 
 // Users (keep existing)

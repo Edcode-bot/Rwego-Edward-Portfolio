@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { Send, MapPin, Mail, Github, Clock, CheckCircle } from "lucide-react";
-import { SiX } from "react-icons/si";
+import { SiX, SiLinkedin, SiInstagram, SiDiscord } from "react-icons/si";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -34,8 +34,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "hello@edcode.dev",
-    href: "mailto:hello@edcode.dev",
+    value: "rwegoedward123@gmail.com",
+    href: "mailto:rwegoedward123@gmail.com",
   },
   {
     icon: MapPin,
@@ -55,17 +55,27 @@ const socialLinks = [
   {
     icon: Github,
     label: "GitHub",
-    href: "https://github.com/edcode",
+    href: "https://github.com/Edcode-bot",
   },
   {
     icon: SiX,
     label: "X (Twitter)",
-    href: "https://x.com/edcode",
+    href: "https://x.com/Edcode_9",
+  },
+  {
+    icon: SiLinkedin,
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/rwego-edward-440052325",
+  },
+  {
+    icon: SiInstagram,
+    label: "Instagram",
+    href: "https://www.instagram.com/rwego_9",
   },
   {
     icon: Mail,
     label: "Email",
-    href: "mailto:hello@edcode.dev",
+    href: "mailto:rwegoedward123@gmail.com",
   },
 ];
 
@@ -267,7 +277,7 @@ export default function Contact() {
               <Card>
                 <CardContent className="p-6">
                   <h3 className="font-semibold text-lg mb-4">Connect With Me</h3>
-                  <div className="flex gap-3">
+                  <div className="flex flex-wrap gap-2">
                     {socialLinks.map((link) => (
                       <Button
                         key={link.label}
