@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Github, Mail, Wallet } from "lucide-react";
+import { Menu, X, Github, Mail } from "lucide-react";
 import { SiX } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -18,7 +18,6 @@ export function Navbar() {
   const [location] = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [walletConnected, setWalletConnected] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,19 +30,6 @@ export function Navbar() {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location]);
-
-  const connectWallet = async () => {
-    if (typeof window !== "undefined" && (window as any).ethereum) {
-      try {
-        await (window as any).ethereum.request({ method: "eth_requestAccounts" });
-        setWalletConnected(true);
-      } catch (error) {
-        console.error("Wallet connection failed:", error);
-      }
-    } else {
-      alert("Please install MetaMask or another Web3 wallet");
-    }
-  };
 
   return (
     <>
@@ -101,19 +87,6 @@ export function Navbar() {
             </div>
 
             <div className="flex items-center gap-2">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={connectWallet}
-                className={`hidden sm:flex ${walletConnected ? "text-accent" : ""}`}
-                data-testid="button-wallet"
-              >
-                <Wallet className="h-5 w-5" />
-                {walletConnected && (
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-accent rounded-full" />
-                )}
-              </Button>
-              
               <ThemeToggle />
 
               <Button
@@ -183,32 +156,22 @@ export function Navbar() {
                 <p className="text-sm text-muted-foreground mb-4">Connect with me</p>
                 <div className="flex gap-3">
                   <Button variant="outline" size="icon" asChild>
-                    <a href="https://github.com/edcode" target="_blank" rel="noopener noreferrer" data-testid="link-github-mobile">
+                    <a href="#" target="_blank" rel="noopener noreferrer" data-testid="link-github-mobile">
                       <Github className="h-4 w-4" />
                     </a>
                   </Button>
                   <Button variant="outline" size="icon" asChild>
-                    <a href="https://x.com/edcode" target="_blank" rel="noopener noreferrer" data-testid="link-x-mobile">
+                    <a href="#" target="_blank" rel="noopener noreferrer" data-testid="link-x-mobile">
                       <SiX className="h-4 w-4" />
                     </a>
                   </Button>
                   <Button variant="outline" size="icon" asChild>
-                    <a href="mailto:hello@edcode.dev" data-testid="link-email-mobile">
+                    <a href="#" data-testid="link-email-mobile">
                       <Mail className="h-4 w-4" />
                     </a>
                   </Button>
                 </div>
               </div>
-
-              <Button
-                variant="outline"
-                className="mt-6 w-full"
-                onClick={connectWallet}
-                data-testid="button-wallet-mobile"
-              >
-                <Wallet className="h-4 w-4 mr-2" />
-                {walletConnected ? "Connected" : "Connect Wallet"}
-              </Button>
             </motion.div>
           </motion.div>
         )}

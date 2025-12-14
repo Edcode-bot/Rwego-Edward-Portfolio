@@ -24,18 +24,12 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
         data-testid={`card-project-${project.id}`}
       >
         <div className="relative aspect-video overflow-hidden rounded-t-lg">
-          {project.imageUrl ? (
-            <img
-              src={project.imageUrl}
-              alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              data-testid={`img-project-${project.id}`}
-            />
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-              <span className="text-4xl font-bold text-primary/30">{project.title[0]}</span>
-            </div>
-          )}
+          <img
+            src={project.imageUrl || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop"}
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            data-testid={`img-project-${project.id}`}
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           
           <div className="absolute bottom-4 left-4 right-4 flex gap-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">

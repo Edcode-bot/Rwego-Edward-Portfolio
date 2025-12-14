@@ -89,12 +89,13 @@ export default function About() {
               transition={{ duration: 0.6 }}
             >
               <div className="relative">
-                <div className="aspect-square max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20">
-                  <div className="w-full h-full flex items-center justify-center">
-                    <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                      <span className="text-5xl font-bold text-white">E</span>
-                    </div>
-                  </div>
+                <div className="aspect-square max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop&crop=faces"
+                    alt="Rwego Edward - Profile"
+                    className="w-full h-full object-cover"
+                    data-testid="img-profile"
+                  />
                 </div>
                 <motion.div
                   className="absolute -bottom-4 -right-4 bg-card p-4 rounded-xl shadow-lg border border-border"

@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Github, Mail, MapPin, Heart } from "lucide-react";
+import { Github, Mail, MapPin } from "lucide-react";
 import { SiX } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 
@@ -11,12 +11,6 @@ const footerLinks = {
     { href: "/blog", label: "Blog" },
     { href: "/contact", label: "Contact" },
   ],
-  services: [
-    { label: "AI Applications" },
-    { label: "Web3 & Blockchain" },
-    { label: "Full-Stack Development" },
-    { label: "Rapid Prototyping" },
-  ],
 };
 
 export function Footer() {
@@ -25,7 +19,7 @@ export function Footer() {
   return (
     <footer className="bg-card border-t border-border" data-testid="footer">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
             <Link href="/">
               <div className="flex items-center gap-3 cursor-pointer mb-4" data-testid="link-footer-logo">
@@ -45,17 +39,17 @@ export function Footer() {
             </div>
             <div className="flex gap-2">
               <Button variant="outline" size="icon" asChild>
-                <a href="https://github.com/edcode" target="_blank" rel="noopener noreferrer" data-testid="link-footer-github">
+                <a href="#" target="_blank" rel="noopener noreferrer" data-testid="link-footer-github">
                   <Github className="h-4 w-4" />
                 </a>
               </Button>
               <Button variant="outline" size="icon" asChild>
-                <a href="https://x.com/edcode" target="_blank" rel="noopener noreferrer" data-testid="link-footer-x">
+                <a href="#" target="_blank" rel="noopener noreferrer" data-testid="link-footer-x">
                   <SiX className="h-4 w-4" />
                 </a>
               </Button>
               <Button variant="outline" size="icon" asChild>
-                <a href="mailto:hello@edcode.dev" data-testid="link-footer-email">
+                <a href="#" data-testid="link-footer-email">
                   <Mail className="h-4 w-4" />
                 </a>
               </Button>
@@ -76,25 +70,11 @@ export function Footer() {
               ))}
             </ul>
           </div>
-
-          <div>
-            <h3 className="font-semibold mb-4">Services</h3>
-            <ul className="space-y-3">
-              {footerLinks.services.map((service) => (
-                <li key={service.label} className="text-muted-foreground">
-                  {service.label}
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-center">
           <p className="text-sm text-muted-foreground">
             {currentYear} Rwego Edward (Edcode). All rights reserved.
-          </p>
-          <p className="text-sm text-muted-foreground flex items-center gap-1">
-            Built with <Heart className="h-3 w-3 text-destructive" /> using React, TypeScript & Web3
           </p>
         </div>
       </div>

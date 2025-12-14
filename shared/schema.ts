@@ -27,6 +27,7 @@ export const posts = pgTable("posts", {
   title: text("title").notNull(),
   content: text("content").notNull(),
   imageUrl: text("image_url"),
+  imageUrls: text("image_urls").array(),
   hashtags: text("hashtags").array(),
   createdAt: timestamp("created_at").defaultNow(),
   likes: integer("likes").default(0),
