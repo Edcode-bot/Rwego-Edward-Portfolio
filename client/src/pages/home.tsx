@@ -253,7 +253,7 @@ export default function Home() {
               <Button variant="outline" size="lg" asChild>
                 <a href="mailto:hello@edcode.dev" data-testid="button-email-cta">
                   <ExternalLink className="mr-2 h-4 w-4" />
-                  hello@edcode.dev
+                  rwegoedward123@gmail.com
                 </a>
               </Button>
             </div>

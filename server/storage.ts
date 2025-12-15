@@ -10,14 +10,14 @@ export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
-  
+
   getProjects(): Promise<Project[]>;
   getProject(id: string): Promise<Project | undefined>;
   getFeaturedProjects(): Promise<Project[]>;
-  
+
   getPosts(): Promise<Post[]>;
   getPost(id: string): Promise<Post | undefined>;
-  
+
   createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
 }
 
@@ -41,135 +41,96 @@ export class MemStorage implements IStorage {
         id: "intellitutor-ai",
         title: "IntelliTutor AI",
         description: "An AI-powered educational platform that provides personalized learning experiences using advanced NLP and adaptive algorithms.",
-        longDescription: "IntelliTutor AI revolutionizes online education by leveraging cutting-edge artificial intelligence to create truly personalized learning paths. The platform analyzes student performance in real-time, adapting content difficulty and teaching methods to optimize knowledge retention. Features include intelligent tutoring, automated assessments, progress tracking, and AI-generated study materials.",
+        longDescription:
+          "IntelliTutor AI revolutionizes online education by leveraging cutting-edge artificial intelligence to create truly personalized learning paths. The platform analyzes student performance in real-time, adapting content difficulty and teaching methods to optimize knowledge retention. Features include intelligent tutoring, automated assessments, progress tracking, and AI-generated study materials.",
         techStack: ["React", "TypeScript", "Python", "TensorFlow", "OpenAI API", "PostgreSQL", "FastAPI"],
         category: "AI",
-        imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop",
-        liveUrl: "#",
-        githubUrl: "#",
+        imageUrl: "https://i.postimg.cc/4yQBP057/Intellitutor_AI.png",
+        githubUrl: "https://github.com/intellitutorai/IntelliTutorAI",
+        liveUrl: "https://intellitutor-ai.onrender.com/",
         featured: true,
         order: 1,
       },
       {
         id: "glidepay",
         title: "GlidePay",
-        description: "A seamless cross-border payment solution built on blockchain technology with near-instant settlements and minimal fees.",
-        longDescription: "GlidePay transforms international payments by utilizing blockchain technology to enable instant, low-cost transfers across borders. The platform supports multiple cryptocurrencies and stablecoins, offering users a seamless experience with enterprise-grade security. Features include multi-signature wallets, automated compliance checks, and real-time exchange rates.",
+        description: "A seamless cross-border payment solution enabling instant money transfers across Africa, secure rent payments, and integrated user chat.",
+        longDescription:
+          "GlidePay is a modern financial platform focused on simplifying payments in Africa. It allows users to send money instantly across borders, pay rent securely with flexible options, and communicate via a built-in secure chat system. Built with blockchain elements for transparency and speed, it aims to make financial transactions accessible, fast, and reliable for everyday users.",
         techStack: ["React", "Solidity", "Ethers.js", "Node.js", "Hardhat", "IPFS", "The Graph"],
-        category: "Web3",
-        imageUrl: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=600&fit=crop",
-        liveUrl: "#",
-        githubUrl: "#",
+        category: "Web3 / FinTech",
+        imageUrl: "https://i.postimg.cc/sgvv4hj8/Glidepay.png",
+        githubUrl: "https://github.com/Edcode-bot/Glide-Pay",
+        liveUrl: "https://glide-pay.onrender.com",
         featured: true,
         order: 2,
       },
       {
-        id: "borderless-yield",
-        title: "Borderless Yield",
-        description: "A DeFi yield aggregator that automatically optimizes returns across multiple protocols and chains.",
-        longDescription: "Borderless Yield is a sophisticated DeFi platform that maximizes user returns by automatically allocating assets across the highest-yielding opportunities in the ecosystem. The protocol features cross-chain compatibility, gas optimization, risk assessment tools, and transparent fee structures. Users can stake, farm, and compound their rewards with a single click.",
-        techStack: ["Solidity", "React", "Web3.js", "Chainlink", "Uniswap SDK", "Hardhat", "TypeScript"],
-        category: "Web3",
-        imageUrl: "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&h=600&fit=crop",
-        liveUrl: "#",
-        githubUrl: "#",
+        id: "rockchain-duel-arena",
+        title: "Rockchain Duel Arena",
+        description:
+          "A fast-paced on-chain duel game where players battle, wager, and win using Celo MiniPay.",
+        longDescription:
+          "Rock Chain Duel is a Web3 arcade-style duel game built on Celo that blends classic competitive gameplay with real on-chain incentives. Players enter head-to-head duels, place small wagers via MiniPay, and battle it out in a provably fair environment powered by smart contracts. The game is optimized for mobile, beginner-friendly for Web2 users, and showcases seamless MiniPay integration, making blockchain gaming feel instant, fun, and accessible.",
+        techStack: [
+          "Solidity",
+          "Celo Blockchain",
+          "MiniPay SDK",
+          "React",
+          "JavaScript",
+          "HTML & CSS"
+        ],
+        category: "Web3 / Blockchain Gaming / Full-Stack",
+        imageUrl: "https://i.postimg.cc/tgdy3q6q/Rocakchain_duel.png",
+        githubUrl: "https://github.com/Edcode-bot/RockchainDeulArena",
+        liveUrl: "https://rockchain-deul-arena.vercel.app/",
         featured: true,
         order: 3,
-      },
-      {
-        id: "devops-dashboard",
-        title: "DevOps Command Center",
-        description: "A comprehensive monitoring and deployment dashboard for managing microservices infrastructure at scale.",
-        longDescription: "DevOps Command Center provides teams with complete visibility into their infrastructure. Features real-time metrics, log aggregation, automated alerting, one-click deployments, and rollback capabilities. Integrates with popular CI/CD tools and cloud providers.",
-        techStack: ["React", "Node.js", "Kubernetes", "Docker", "Prometheus", "Grafana", "PostgreSQL"],
-        category: "Full-Stack",
-        imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-        liveUrl: "#",
-        githubUrl: "#",
-        featured: false,
-        order: 4,
-      },
-      {
-        id: "nlp-sentiment-engine",
-        title: "Sentiment Analysis Engine",
-        description: "Real-time sentiment analysis API for social media monitoring and brand reputation management.",
-        longDescription: "A powerful NLP-based sentiment analysis engine that processes millions of social media posts, reviews, and comments in real-time. Provides actionable insights for marketing teams and brand managers with detailed emotion classification and trend detection.",
-        techStack: ["Python", "PyTorch", "FastAPI", "Redis", "Elasticsearch", "Docker", "AWS"],
-        category: "AI",
-        imageUrl: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=600&fit=crop",
-        liveUrl: "#",
-        githubUrl: "#",
-        featured: false,
-        order: 5,
-      },
-      {
-        id: "nft-marketplace",
-        title: "ArtVault NFT Marketplace",
-        description: "A curated NFT marketplace focused on digital art with gasless minting and creator royalties.",
-        longDescription: "ArtVault is a premium NFT marketplace designed for digital artists and collectors. Features gasless minting using meta-transactions, lazy minting, creator royalty enforcement, auction mechanics, and social features for community building.",
-        techStack: ["Next.js", "Solidity", "IPFS", "The Graph", "Polygon", "Tailwind CSS"],
-        category: "Web3",
-        imageUrl: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=800&h=600&fit=crop",
-        liveUrl: "#",
-        githubUrl: "#",
-        featured: false,
-        order: 6,
       },
     ];
 
     const postsData: Post[] = [
       {
         id: "post-1",
-        title: "Building AI-Powered Applications in 2024",
-        content: "Just wrapped up an incredible project integrating GPT-4 with real-time data pipelines. The future of AI in production apps is here, and it's more accessible than ever. Here's what I learned about prompt engineering, rate limiting, and cost optimization. The key insights include proper prompt caching, streaming responses for better UX, and implementing fallback mechanisms for API reliability.",
-        imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=800&fit=crop",
+        title: "Competing at ISCC Uganda",
+        content:
+          "I wrapped up a focused and productive day at the ISCC Uganda competition — a national challenge that pushed me to solve real problems with Python under real pressure. Being around sharp student minds elevated how I think, build, and execute.The environment demanded clarity, creativity, and resilience. Competing at that level reminded me why I enjoy building and improving every day.",
+        imageUrl: "https://i.postimg.cc/q7qV3Jjy/ISCC_Uganda.jpg",
         imageUrls: [
-          "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=800&fit=crop",
-          "https://images.unsplash.com/photo-1684163761883-35b33fc5ef94?w=800&h=800&fit=crop",
-          "https://images.unsplash.com/photo-1676299081847-824916de030a?w=800&h=800&fit=crop"
+          "https://i.postimg.cc/vHbKn8m8/ISCC_ug.jpg",
+          "https://i.postimg.cc/Z5fznzbd/profile.jpg",
+          "https://i.postimg.cc/q7qV3Jjy/ISCC_Uganda.jpg"
         ],
         hashtags: ["AI", "OpenAI", "Development", "Tech"],
-        createdAt: new Date("2024-12-10"),
+        createdAt: new Date("2025-12-10"),
         likes: 42,
       },
       {
         id: "post-2",
-        title: "Web3 Security Best Practices",
-        content: "After auditing several DeFi protocols, I've compiled my top security considerations for smart contract development. From reentrancy guards to access control patterns, security should never be an afterthought. Always use OpenZeppelin's battle-tested contracts as a foundation, implement proper access control, and never trust user input without validation.",
-        imageUrl: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=800&fit=crop",
+        title: "Showcasing IntelliTutor AI at the National Science Fair",
+        content:
+          "I had the opportunity to represent St. Mary’s College Rushoroza at the National Science Fair in Kololo, presenting my AI project — IntelliTutor AI. The tool helps students revise, take quizzes, write essays, and access learning videos through an intelligent assistant built from the ground up.Taking a project that started in a small code editor in Kabale to a national stage was a powerful reminder of what young innovators can build with focus and curiosity. Grateful for everyone who supported the journey and excited to keep creating tools that empower learners.",
+        imageUrl: "https://i.postimg.cc/85zJ26p9/SESEMAT_Nationals.jpg",
         imageUrls: [
-          "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=800&fit=crop",
-          "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=800&h=800&fit=crop"
+          "https://i.postimg.cc/85zJ26p9/SESEMAT_Nationals.jpg",
+          "https://i.postimg.cc/Mp1QVw3t/SESEMAT_Nationals.jpg"
         ],
         hashtags: ["Web3", "Security", "Solidity", "DeFi"],
-        createdAt: new Date("2024-12-08"),
+        createdAt: new Date("2025-07-08"),
         likes: 38,
       },
       {
         id: "post-3",
-        title: "The Evolution of Frontend Architecture",
-        content: "Reflecting on how frontend development has evolved. From jQuery spaghetti to modern React with server components. The developer experience improvements are remarkable, but complexity management remains key. The shift towards component-based architecture has revolutionized how we think about building user interfaces.",
-        imageUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=800&fit=crop",
+        title: "Presenting IntelliTutor AI at the UPSTU National Innovation Competition",
+        content:
+          "I presented IntelliTutor AI at the UPSTU National Science Innovation Competition 2025 at MUBS Nakawa. Sharing this project on a national stage was a powerful reminder of how AI can support learning across Uganda. Grateful for the experience and the innovators who continue pushing education forward.",
+        imageUrl: "https://i.postimg.cc/XqZTDQtz/UPSTU_nationals.jpg",
         imageUrls: [
-          "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=800&fit=crop"
+          "https://i.postimg.cc/bdcFV8xr/UPSTU_nationals.jpg"
         ],
         hashtags: ["React", "Frontend", "Architecture", "TypeScript"],
-        createdAt: new Date("2024-12-05"),
+        createdAt: new Date("2025-08-05"),
         likes: 55,
-      },
-      {
-        id: "post-4",
-        title: "Cross-Chain Development Insights",
-        content: "Working on cross-chain protocols has taught me the importance of standardization and bridge security. Here's my take on the current state of blockchain interoperability and what's coming next. The future is multi-chain, and developers need to embrace this paradigm shift.",
-        imageUrl: "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&h=800&fit=crop",
-        imageUrls: [
-          "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&h=800&fit=crop",
-          "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=800&h=800&fit=crop",
-          "https://images.unsplash.com/photo-1618044619888-009e412ff12a?w=800&h=800&fit=crop"
-        ],
-        hashtags: ["Blockchain", "CrossChain", "Web3", "Development"],
-        createdAt: new Date("2024-12-01"),
-        likes: 29,
       },
     ];
 

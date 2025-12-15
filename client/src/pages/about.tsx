@@ -40,27 +40,27 @@ const achievements: Achievement[] = [
     id: "1",
     title: "UPSTU Regionals & Nationals",
     description: "Represented school at the Uganda Physics & Sciences Teachers' Union competitions",
-    date: "2024",
+    date: "2025",
     type: "award",
-    certificateUrl: "https://drive.google.com/file/d/19c8tbX8dEweQ9YlVTia3ar1iyzC_iK0B/view",
-    certificateImage: "https://drive.google.com/uc?export=view&id=19c8tbX8dEweQ9YlVTia3ar1iyzC_iK0B",
+    certificateUrl: "https://postimg.cc/ygnQSCws",
+    certificateImage: "https://i.postimg.cc/vTwpkQhg/UPSTU_Exhibition_Uganda.jpg",
   },
   {
     id: "2", 
     title: "SESEMAT Exhibition",
     description: "Exhibited IntelliTutor AI at the Secondary Science & Mathematics Teachers conference",
-    date: "2024",
+    date: "2025",
     type: "award",
-    certificateUrl: "https://drive.google.com/file/d/19alP6G5gVAUdVEg5TYu6J7txMIEVzWcn/view",
-    certificateImage: "https://drive.google.com/uc?export=view&id=19alP6G5gVAUdVEg5TYu6J7txMIEVzWcn",
+    certificateUrl: "https://postimg.cc/56rr31jt",
+    certificateImage: "https://i.postimg.cc/K8cym82t/SESEMAT_Nationals_Uganda.jpg",
   },
   {
     id: "3",
     title: "ISCC Uganda",
     description: "Participated in the International Science & Computing Challenge",
-    date: "2023",
+    date: "2025",
     type: "award",
-    certificateUrl: "https://drive.google.com/file/d/1xAYG8lfiHmgB8hEFyGJqLMysADZ6Q01d/view",
+    certificateUrl: "https://postimg.cc/Whyynjts",
     certificateImage: "https://drive.google.com/uc?export=view&id=1xAYG8lfiHmgB8hEFyGJqLMysADZ6Q01d",
   },
 ];
@@ -83,7 +83,7 @@ const services = [
   },
 ];
 
-const profileImageUrl = "https://drive.google.com/uc?export=view&id=1wATYXPoNKNK13nE85YykDm_k3afvtPUC";
+const profileImageUrl = "https://i.postimg.cc/Z5fznzbd/profile.jpg";
 
 export default function About() {
   const [selectedCertificate, setSelectedCertificate] = useState<Achievement | null>(null);
