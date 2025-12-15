@@ -5,30 +5,33 @@
   "outputDirectory": "dist/public",
   "installCommand": "npm install",
   "framework": null,
-  "routes": [
+
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/index.ts"
+      "source": "/api/(.*)",
+      "destination": "/api/index.ts"
     },
     {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
+      "source": "/assets/(.*)",
+      "destination": "/assets/$1"
     },
     {
-      "src": "/favicon.png",
-      "dest": "/favicon.png"
+      "source": "/favicon.png",
+      "destination": "/favicon.png"
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ],
+
   "functions": {
     "api/index.ts": {
       "runtime": "@vercel/node@3.0.0",
       "maxDuration": 30
     }
   },
+
   "headers": [
     {
       "source": "/api/(.*)",
