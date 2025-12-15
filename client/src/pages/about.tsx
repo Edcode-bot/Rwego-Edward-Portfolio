@@ -61,7 +61,7 @@ const achievements: Achievement[] = [
     date: "2025",
     type: "award",
     certificateUrl: "https://postimg.cc/Whyynjts",
-    certificateImage: "https://drive.google.com/uc?export=view&id=1xAYG8lfiHmgB8hEFyGJqLMysADZ6Q01d",
+    certificateImage: "https://i.postimg.cc/HkWCTkg8/ISCC_Uganda_Certificate.jpg",
   },
 ];
 
